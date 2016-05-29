@@ -8,12 +8,12 @@ This Django REST API project is the companion of a [Snippet Andorid App](https:/
 
         INSTALLED_APPS = [
             ...
-            'snippet-api',
+            'snippet',
         ]
 
 2. Include the polls URLconf in your project urls.py like this:
         
-        url(r'^snippet/', include('snippet-api.urls')),
+        url(r'^snippet/', include('snippet.urls')),
 
 3. Run `python manage.py migrate` to create the snippet models.
 
