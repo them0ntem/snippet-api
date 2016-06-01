@@ -1,21 +1,16 @@
-from pprint import pprint
-
-from requests import Response
-
-from snippet.models import Snippet
-from snippet.serializers import SnippetSerializer, UserSerializer, AuthTokenSerializer
-from snippet.permissions import IsOwnerOrReadOnly
-
 from django.contrib.auth.models import User
-
-from rest_framework.decorators import api_view
-from rest_framework.reverse import reverse
-from rest_framework.views import APIView
+from requests import Response
 from rest_framework import generics
 from rest_framework import permissions, renderers, parsers
-from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from rest_framework.views import APIView
+
+from snippet.models import Snippet
+from snippet.permissions import IsOwnerOrReadOnly
+from snippet.serializers import SnippetSerializer, UserSerializer, AuthTokenSerializer
 
 
 @api_view(['GET'])

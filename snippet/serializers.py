@@ -1,16 +1,13 @@
 import time
-from pprint import pprint
-from human_dates import time_ago_in_words
 
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.utils.timezone import now
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from human_dates import time_ago_in_words
+from rest_framework import serializers
+from rest_framework.reverse import reverse
 
 from snippet.models import Snippet
-
-from rest_framework.reverse import reverse
-from rest_framework import serializers
 
 
 class SnippetPrevNextHyperlink(serializers.HyperlinkedIdentityField):
@@ -89,11 +86,10 @@ class SnippetSerializer(serializers.ModelSerializer):
 	prev = SnippetPrevNextHyperlink(view_name="snippet-detail", lookup_fields='pk', next=False, read_only=True)
 	days_ago = serializers.SerializerMethodField()
 
-
 	class Meta:
 		model = Snippet
 		fields = (
-		'id', 'title', 'code', 'linenos', 'language', 'style', 'owner', 'highlight', 'next', 'prev', 'days_ago')
+			'id', 'title', 'code', 'linenos', 'language', 'style', 'owner', 'highlight', 'next', 'prev', 'days_ago')
 
 	def get_days_ago(self, obj):
 		return time_ago_in_words(obj.created)
